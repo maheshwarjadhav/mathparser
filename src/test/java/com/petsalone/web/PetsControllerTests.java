@@ -1,4 +1,4 @@
-package com.petsalone.controller;
+package com.petsalone.web;
 
 import com.petsalone.model.PetEntity;
 import com.petsalone.model.PetTypeEntity;
@@ -27,8 +27,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PetsControllerTests {
+
     @MockBean
     private PetsService petsService;
+
     @Autowired
     private WebApplicationContext context;
     private MockMvc mvc;
