@@ -55,7 +55,7 @@ public class PetsControllerTests {
 	}
 
     @Test
-    @WithMockUser("testuser")
+    @WithMockUser("test_user")
     public void given_AuthUser_OnGetAllMissingPetService_shouldFailWith3xxRedirection() throws Exception {
         List<PetEntity> pets = new ArrayList<>();
         pets.add(new PetEntity("Max", LocalDateTime.now().minusDays(6), new PetTypeEntity("Cat")));

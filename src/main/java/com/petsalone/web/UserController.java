@@ -2,7 +2,6 @@ package com.petsalone.web;
 
 import com.petsalone.service.PetsService;
 import com.petsalone.service.SecurityService;
-import com.petsalone.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class UserController {
 
-    private UserService userService;
-    private SecurityService securityService;
-    private UserValidator userValidator;
-    private PetsService petsService;
+    private final SecurityService securityService;
+    private final PetsService petsService;
 
-    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator, PetsService petsService) {
-        this.userService = userService;
+    public UserController(SecurityService securityService, PetsService petsService) {
         this.securityService = securityService;
-        this.userValidator = userValidator;
         this.petsService = petsService;
     }
 

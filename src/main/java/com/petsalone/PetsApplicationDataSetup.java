@@ -56,10 +56,8 @@ public class PetsApplicationDataSetup {
         petRepository.save(new PetEntity("Fluffy", LocalDateTime.now().minusDays(10), petTypeRepository.findByType("Cat")));
         petRepository.save(new PetEntity("Snowball", LocalDateTime.now().minusDays(2), petTypeRepository.findByType("Bird")));
         User user = new User();
-        user.setUsername("admin");
-        user.setPassword("test");
-        /*user.setUsername("elmyraduff");
-        user.setPassword("MontanaMax!!");*/
+        user.setUsername("elmyraduff");
+        user.setPassword("MontanaMax!!");
         user.setRoles(Set.of(roleRepository.save(new Role("USER"))));
         userService.save(user);
     }
