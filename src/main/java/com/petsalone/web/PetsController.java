@@ -1,9 +1,10 @@
 package com.petsalone.web;
 
 import com.petsalone.model.PetEntity;
+import com.petsalone.repository.UserRepository;
 import com.petsalone.service.PetsService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PetsController {
 
     private final PetsService petsService;
+    private final UserRepository userRepository;
 
-    public PetsController(PetsService petsService) {
+    public PetsController(PetsService petsService, UserRepository userRepository) {
         this.petsService = petsService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/getAllMissingPets")
@@ -33,7 +36,8 @@ public class PetsController {
 
     @PostMapping("/addmissingpet")
     public String addMissingPetPost(PetEntity missingPet, BindingResult result, Model model, Authentication authentication) {
-        authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
+        missingPet.setReportedBy(userRepository.findByUsername(user.getUsername()));
         if (result.hasErrors()) {
             return "pets/add-missing-pet";
         }

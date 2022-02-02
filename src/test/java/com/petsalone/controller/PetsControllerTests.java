@@ -46,13 +46,13 @@ public class PetsControllerTests {
         mvc.perform(get("/getAllMissingPets")).andExpect(status().isOk());
     }
 
-	@Test
-	public void given_AnonymousUser_OnPostMissingPetService_shouldFailWith3xxRedirection() throws Exception {
-		List<PetEntity> pets = new ArrayList<>();
-		pets.add(new PetEntity("Max", LocalDateTime.now().minusDays(6), new PetTypeEntity("Cat")));
-		Mockito.when(petsService.getAllMissingPets()).thenReturn(pets);
-		mvc.perform(get("/addmissingpet")).andExpect(status().is3xxRedirection());
-	}
+    @Test
+    public void given_AnonymousUser_OnPostMissingPetService_shouldFailWith3xxRedirection() throws Exception {
+        List<PetEntity> pets = new ArrayList<>();
+        pets.add(new PetEntity("Max", LocalDateTime.now().minusDays(6), new PetTypeEntity("Cat")));
+        Mockito.when(petsService.getAllMissingPets()).thenReturn(pets);
+        mvc.perform(get("/addmissingpet")).andExpect(status().is3xxRedirection());
+    }
 
     @Test
     @WithMockUser("test_user")

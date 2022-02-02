@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,11 +24,22 @@ public class PetEntity extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private PetTypeEntity petTypeEntity;
 
+    @ManyToOne
+    private User reportedBy;
+
     public PetEntity(String name, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime missingSince, PetTypeEntity petTypeEntity) {
         super();
         this.name = name;
         this.missingSince = missingSince;
         this.petTypeEntity = petTypeEntity;
+    }
+
+    public PetEntity(String name, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime missingSince, PetTypeEntity petTypeEntity, User reportedBy) {
+        super();
+        this.name = name;
+        this.missingSince = missingSince;
+        this.petTypeEntity = petTypeEntity;
+        this.reportedBy = reportedBy;
     }
 
     public PetEntity() {

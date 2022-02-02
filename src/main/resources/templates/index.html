@@ -23,6 +23,7 @@
                                 <th>Name</th>
                                 <th>Missing Since</th>
                                 <th>Pet Type</th>
+                                <th>Reported By</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -30,6 +31,7 @@
                                 <td th:text="${pet.name}"></td>
                                 <td th:text="${#temporals.format(pet.missingSince, 'dd-MM-yyyy HH:mm')}"></td>
                                 <td th:text="${pet.petTypeEntity.type}"></td>
+                                <td th:text="${pet.reportedBy.username}"></td>
                             </tr>
                             </tbody>
                         </table>

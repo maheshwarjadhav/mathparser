@@ -2,57 +2,32 @@ package com.petsalone.service;
 
 import com.petsalone.model.PetEntity;
 import com.petsalone.model.PetTypeEntity;
-import com.petsalone.repository.PetRepository;
-import com.petsalone.repository.PetTypeRepository;
 import com.petsalone.service.impl.PetsServiceImpl;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class PetsServiceTest {
 
-    @InjectMocks
+    @Autowired
     PetsServiceImpl petsService;
 
-    @Mock
-    PetRepository petRepository;
-
-    @Mock
-    PetTypeRepository petTypeRepository;
-
     @Test
-    void testFindAllMissingPets() {
-        List<PetEntity> pets = new ArrayList<>();
-        pets.add(new PetEntity("Max", LocalDateTime.now().minusDays(6), new PetTypeEntity("Cat")));
-        pets.add(new PetEntity("Fluffy", LocalDateTime.now().minusDays(10), new PetTypeEntity("Dog")));
-        pets.add(new PetEntity("Snowball", LocalDateTime.now().minusDays(2), new PetTypeEntity("Bird")));
-
-        when(petRepository.findAllByOrderByMissingSinceDesc()).thenReturn(pets);
-
-        List<PetEntity> empList = petsService.getAllMissingPets();
-
-        assertEquals(3, empList.size());
-        verify(petRepository, times(1)).findAllByOrderByMissingSinceDesc();
+    void test_Add_And_Find_MissingPets() {
+        List<PetEntity> pets = petsService.getAllMissingPets();
+        addMissingPet("Test", "Cat");
+        assertEquals(pets.size() + 1, petsService.getAllMissingPets().size());
     }
 
-    @Test
-    void testAddMissingPets() {
-        PetTypeEntity petType = new PetTypeEntity("Cat");
-        PetEntity pet = new PetEntity("Max", LocalDateTime.now().minusDays(6), petType);
-        when(petTypeRepository.findByType("Cat")).thenReturn(petType);
-
+    void addMissingPet(String petName, String petType) {
+        PetTypeEntity petTypeEntity = new PetTypeEntity(petType);
+        PetEntity pet = new PetEntity(petName, LocalDateTime.now().minusDays(6), petTypeEntity);
         petsService.addMissingPet(pet);
-
-        verify(petRepository, times(1)).save(pet);
     }
 }
