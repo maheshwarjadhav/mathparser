@@ -14,10 +14,6 @@ import java.util.Set;
 @Setter
 public class Role extends AbstractEntity {
 
-/*    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;*/
-
     private String name;
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;

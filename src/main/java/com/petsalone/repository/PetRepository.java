@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface PetRepository extends JpaRepository<PetEntity, Long> {
 
-    //findAllByOrderByIdAsc
     List<PetEntity> findAllByOrderByMissingSinceDesc();
 
 }
