@@ -24,12 +24,6 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-//@SpringBootTest
-/*@AutoConfigureMockMvc
-@ContextConfiguration(classes = {PetsApplication.class})
-@WebMvcTest*/
-//@WebMvcTest(PetsController.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PetsControllerTests {
