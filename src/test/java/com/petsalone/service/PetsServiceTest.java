@@ -4,6 +4,7 @@ import com.petsalone.model.PetEntity;
 import com.petsalone.model.PetTypeEntity;
 import com.petsalone.repository.PetRepository;
 import com.petsalone.repository.PetTypeRepository;
+import com.petsalone.service.impl.PetsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.*;
 public class PetsServiceTest {
 
     @InjectMocks
-    PetsService petsService;
+    PetsServiceImpl petsService;
 
     @Mock
     PetRepository petRepository;

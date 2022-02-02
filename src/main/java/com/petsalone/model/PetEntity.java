@@ -16,9 +16,11 @@ public class PetEntity extends AbstractEntity {
 
     // the name
     private String name;
+
     // missing since
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime missingSince;
+
     // type
     // 1 = Cat, 2 = Dog, 3 = Hamster, 4 = Bird, 5 = Rabbit, 6 = Fish, 7 = Lizard, 8 = Horse, 9 = Gerbil, 10 = Tortoise
     @ManyToOne(fetch = FetchType.EAGER)

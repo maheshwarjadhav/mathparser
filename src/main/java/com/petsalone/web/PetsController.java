@@ -32,7 +32,6 @@ public class PetsController {
     }
 
     @PostMapping("/addmissingpet")
-    @PreAuthorize("hasRole('USER')")
     public String addMissingPetPost(PetEntity missingPet, BindingResult result, Model model, Authentication authentication) {
         authentication.getPrincipal();
         if (result.hasErrors()) {
