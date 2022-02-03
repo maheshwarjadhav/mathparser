@@ -29,7 +29,7 @@ public class PetsController {
     @GetMapping("/getAllMissingPets")
     public String getAllMissingPets(Model model) {
         model.addAttribute("pets", petsService.getAllMissingPets());
-        return "pets/index";
+        return "/index";
     }
 
     @GetMapping("/addmissingpet")

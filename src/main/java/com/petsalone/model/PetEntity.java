@@ -7,10 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,12 +15,9 @@ import java.time.LocalDateTime;
 public class PetEntity extends AbstractEntity {
 
     // the name
-    @NotBlank(message = "Name is mandatory")
-    @Size(min = 20)
     private String name;
 
     // missing since
-    @NotBlank(message = "Name is mandatory")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime missingSince;
 
