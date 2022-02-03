@@ -2,13 +2,15 @@ package com.petsalone.web;
 
 import com.petsalone.model.PetEntity;
 import com.petsalone.service.PetsService;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
+
 
 @Controller
 public class PetsController {
@@ -22,7 +24,7 @@ public class PetsController {
     @GetMapping("/getAllMissingPets")
     public String getAllMissingPets(Model model) {
         model.addAttribute("pets", petsService.getAllMissingPets());
-        return "pets/index";
+        return "/index";
     }
 
     @GetMapping("/addmissingpet")
@@ -32,13 +34,13 @@ public class PetsController {
     }
 
     @PostMapping("/addmissingpet")
-    @PreAuthorize("hasRole('USER')")
-    public String addMissingPetPost(PetEntity missingPet, BindingResult result, Model model, Authentication authentication) {
-        authentication.getPrincipal();
+   // @PreAuthorize("hasRole('USER')")
+    public String addMissingPetPost(@ModelAttribute("petEntity") @Valid PetEntity petEntity, BindingResult result) {
+     //   authentication.getPrincipal();
         if (result.hasErrors()) {
-            return "pets/add-missing-pet";
+            return "add-missing-pet";
         }
-        petsService.addMissingPet(missingPet);
+        petsService.addMissingPet(petEntity);
         return "redirect:/";
     }
 

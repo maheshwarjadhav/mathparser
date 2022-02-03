@@ -1,54 +1,46 @@
 <!DOCTYPE HTML>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
     <title>Home Page</title>
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
-    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/missingpet.css"/>
 </head>
 <body>
 
-<div class="container">
-    <div sec:authorize="isAuthenticated()">
-        <form id="logoutForm" method="POST" th:action="@{/logout}">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-
-        <h2>Welcome <span sec:authentication="name"></span> | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-    </div>
-</div>
 <div layout:fragment="content">
     <form action="#" th:action="@{/addmissingpet}" th:object="${petEntity}" method="post">
-        <label for="name">Name</label>
-        <input type="text" th:field="*{name}" id="name" placeholder="Name">
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-        <label for="missingSince">Missing Since</label>
-        <input type="datetime-local" th:field="*{missingSince}" id="datetimepicker1" placeholder="missingSince">
-        <span th:if="${#fields.hasErrors('missingSince')}" th:errors="*{missingSince}"></span>
-        <label for="petType">Pet Type</label>
-        <input type="text" th:field="*{petTypeEntity.type}" id="petType" placeholder="Pet Type">
-        <span th:if="${#fields.hasErrors('petTypeEntity.type')}" th:errors="*{petTypeEntity.type}"></span>
-        <input type="submit" value="Add Missing Pets">
+        <div class="row">
+            <div class="col-25">
+                <label for="name">Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" th:field="*{name}" id="name" placeholder="Name">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="missingSince">Missing Since</label>
+            </div>
+            <div class="col-75">
+                <input type="datetime-local" th:field="*{missingSince}" id="missingSince" placeholder="missingSince">
+                <span th:if="${#fields.hasErrors('missingSince')}" th:errors="*{missingSince}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="petType">Pet Type</label>
+            </div>
+            <div class="col-75">
+                <input type="text" th:field="*{petTypeEntity.type}" id="petType" placeholder="Pet Type">
+                <span th:if="${#fields.hasErrors('petTypeEntity.type')}" th:errors="*{petTypeEntity.type}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="Add Missing Pets">
+        </div>
     </form>
 </div>
 
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script>
-
-<script>
-    $('#datetimepicker1').datepicker({
-        autoclose: true,
-        todayHighlight: true
-    });
-</script>
 </body>
 </html>
