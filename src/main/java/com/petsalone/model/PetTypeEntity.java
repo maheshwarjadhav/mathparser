@@ -13,7 +13,6 @@ import javax.persistence.Id;
 @JsonIgnoreProperties(value = {"id"})
 public class PetTypeEntity {
 
-    // the id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

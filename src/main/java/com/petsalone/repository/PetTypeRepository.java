@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PetTypeRepository extends JpaRepository<PetTypeEntity, Long> {
 
+    //static data cached for better performance
     @Cacheable(value = "petType")
     PetTypeEntity findByType(String type);
 

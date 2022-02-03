@@ -1,4 +1,4 @@
-package com.petsalone.controller;
+package com.petsalone.web;
 
 import com.petsalone.model.PetEntity;
 import com.petsalone.model.PetTypeEntity;
@@ -24,17 +24,13 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-//@SpringBootTest
-/*@AutoConfigureMockMvc
-@ContextConfiguration(classes = {PetsApplication.class})
-@WebMvcTest*/
-//@WebMvcTest(PetsController.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PetsControllerTests {
+
     @MockBean
     private PetsService petsService;
+
     @Autowired
     private WebApplicationContext context;
     private MockMvc mvc;
@@ -52,16 +48,16 @@ public class PetsControllerTests {
         mvc.perform(get("/getAllMissingPets")).andExpect(status().isOk());
     }
 
-	@Test
-	public void given_AnonymousUser_OnPostMissingPetService_shouldFailWith3xxRedirection() throws Exception {
-		List<PetEntity> pets = new ArrayList<>();
-		pets.add(new PetEntity("Max", LocalDateTime.now().minusDays(6), new PetTypeEntity("Cat")));
-		Mockito.when(petsService.getAllMissingPets()).thenReturn(pets);
-		mvc.perform(get("/addmissingpet")).andExpect(status().is3xxRedirection());
-	}
+    @Test
+    public void given_AnonymousUser_OnPostMissingPetService_shouldFailWith3xxRedirection() throws Exception {
+        List<PetEntity> pets = new ArrayList<>();
+        pets.add(new PetEntity("Max", LocalDateTime.now().minusDays(6), new PetTypeEntity("Cat")));
+        Mockito.when(petsService.getAllMissingPets()).thenReturn(pets);
+        mvc.perform(get("/addmissingpet")).andExpect(status().is3xxRedirection());
+    }
 
     @Test
-    @WithMockUser("testuser")
+    @WithMockUser("test_user")
     public void given_AuthUser_OnGetAllMissingPetService_shouldFailWith3xxRedirection() throws Exception {
         List<PetEntity> pets = new ArrayList<>();
         pets.add(new PetEntity("Max", LocalDateTime.now().minusDays(6), new PetTypeEntity("Cat")));
