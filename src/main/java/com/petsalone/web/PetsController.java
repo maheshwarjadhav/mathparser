@@ -39,12 +39,12 @@ public class PetsController {
     }
 
     @PostMapping("/addmissingpet")
-    public String addMissingPetPost(PetEntity missingPet, BindingResult result, Model model, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        missingPet.setReportedBy(userRepository.findByUsername(user.getUsername()));
+    public String addMissingPetPost(@Valid PetEntity missingPet, BindingResult result, Model model, Authentication authentication) {
         if (result.hasErrors()) {
             return "add-missing-pet";
         }
+        User user = (User) authentication.getPrincipal();
+        missingPet.setReportedBy(userRepository.findByUsername(user.getUsername()));
         petsService.addMissingPet(missingPet);
         return "redirect:/";
     }
